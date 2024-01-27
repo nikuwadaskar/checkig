@@ -95,7 +95,10 @@ async function initializeScript() {
     console.log(currentCart)
 }
 
+console.log("page yet loaded")
 
 document?.addEventListener('DOMContentLoaded', function () {
+    console.log("page loaded")
     initializeScript();
 })
+console.log("page not loaded")
