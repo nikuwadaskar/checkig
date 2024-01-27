@@ -11,17 +11,18 @@ async function initializeScript() {
         const projectVolumes = params.get('projectVolumes');
         const projectVariantIds = params.get('projectVariantIds');
         const shopifyCartUrl = window.location.origin;
-        if (clientDesignId && clientDesignId.length < 1) {
+        if (typeof(clientDesignId)=="undefined") {
             return false;
+        }else{
+            return {
+                comeFromUrl: true,
+                clientDesignId,
+                projectIds,
+                projectVolumes,
+                projectVariantIds,
+                shopifyCartUrl
+            };
         }
-        return {
-            comeFromUrl: true,
-            clientDesignId,
-            projectIds,
-            projectVolumes,
-            projectVariantIds,
-            shopifyCartUrl
-        };
     }
 
     function loadCart() {
