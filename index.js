@@ -92,7 +92,7 @@ function initializeScript() {
             })
     } loadCart
     const currentCart = loadCart();
-    console(currentCart)
+    console.log(currentCart)
 }
 
 
