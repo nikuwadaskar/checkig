@@ -186,6 +186,10 @@ const myBackend = "http://127.0.0.1:5500/index.html"
 
 async function initializeScript() {
     let myData = {}
+    // myData.urlParams = transformPropertiesToUrl()
+    // myData?.urlParams?.comeFromUrl = false
+    // myData.currentCart = await loadCart();
+    //manageCartAdd()
     function transformPropertiesToUrl() {
         // ... (transforms properties to URLs in the DOM)
         const urlString = 'https://ezprinthouz.com/cart?clientDesignId=78938d10ec23456da0a5eecdff45a214&projectIds=xw6l29v03C&projectVolumes=1&projectVariantIds=45965700071697';
@@ -197,10 +201,9 @@ async function initializeScript() {
         const projectVariantIds = params.get('projectVariantIds');
         const shopifyCartUrl = window.location.origin
         if (clientDesignId.length < 1) {
-            myData.urlParams.comeFromUrl = false
-            return
+            return false
         }
-        myData.urlParams = {
+        return {
             comeFromUrl: true,
             clientDesignId,
             projectIds,
@@ -209,7 +212,6 @@ async function initializeScript() {
             shopifyCartUrl
         }
     }
-    transformPropertiesToUrl()
     function loadCart() {
         // ... (fetches and returns cart data)
         return TemporaryCart
@@ -229,7 +231,6 @@ async function initializeScript() {
                 throw err;
             })
     }
-    myData.currentCart = await loadCart();
 
     async function addVariantsRequest(productToAdd) {
         // ... (adds Varlets to the cart and returns the result)
@@ -252,8 +253,6 @@ async function initializeScript() {
         }
         return null
     }
-
-
 
     function addProperties() {
         if (myData.urlParams.comeFromUrl == false) {
@@ -283,11 +282,45 @@ async function initializeScript() {
         // reload cart to remove get params
         window.location.href = myData?.urlParams?.shopifyCartUrl;
     }
+  
+    console.log(",dbvzkjdb")
 
-    manageCartAdd()
+    /// Manage cart section 
+    (function () {
+        // Store the original fetch function
+        const originalFetch = window.fetch;
+        // Override the fetch function to log the URL after the request is completed
+        window.fetch = function (url, options) {
+            // Call the original fetch function
+            return originalFetch(url, options)
+                .then(response => {
+                    console.log('Fetch request completed successfully. URL:', url);
+                    // You can add your own custom logic here for successful requests
+                    if(url.includes("change")){
+                        manageChangeButton()
+                    }
+                    return response;
+                })
+                .catch(error => {
+                    console.error('Error in fetch request. URL:', url, 'Error:', error);
+                   
+                });
+        };
+    })();
+    manageEditButton()
+    function manageEditButton() {
+        document.getElementById("edit-button-link").addEventListener("click", getToOurEnd(elem))
+    }
+
+    function getToOurEnd (elem) {
+    console.log(elem)
+    }
+    
+
 }
+
 document?.addEventListener('DOMContentLoaded', function () {
     console.log("page loaded")
-    initializeScript();
 })
+initializeScript();
 console.log("page not loaded")
