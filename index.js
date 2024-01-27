@@ -278,7 +278,7 @@ async function initializeScript() {
         if (typeof (productToAdd) == "boolean" && productToAdd == false) {
             return
         }
-        const result = await addVariantsRequest(productToAdd)()
+        const result = await addVariantsRequest(productToAdd)
         // reload cart to remove get params
         window.location.href = myData?.urlParams?.shopifyCartUrl;
     }
