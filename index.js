@@ -1,80 +1,218 @@
-// function extractTextFromUrl(url) {
-//     // Check if the URL contains the "variant" parameter
-//     const variantMatch = url.match(/variant=([^&]+)/);
-//     if (variantMatch) {
-//         return { text: variantMatch[1], type: 'variant' }; // Return the text after "variant="
-//     }
+TemporaryCart = {
+    "token": "c1-fa8bf13b4bf07427b62b25e7faf02f54",
+    "note": "",
+    "attributes": {},
+    "original_total_price": 14400,
+    "total_price": 14400,
+    "total_discount": 0,
+    "total_weight": 0,
+    "item_count": 4,
+    "items": [
+        {
+            "id": 45965700071697,
+            "properties": {
+                "_clientDesignId": "78938d10ec23456da0a5eecdff45a214",
+                "_projectId": "xw6l29v03C",
+                "design": "https://designer.antigro.com/en?clientDesignId=78938d10ec23456da0a5eecdff45a214"
+            },
+            "quantity": 1,
+            "variant_id": 45965700071697,
+            "key": "45965700071697:4013dd87-e064-4b04-8d74-1e5cd4622838",
+            "title": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS - 22x24",
+            "price": 3600,
+            "original_price": 3600,
+            "discounted_price": 3600,
+            "line_price": 3600,
+            "original_line_price": 3600,
+            "total_discount": 0,
+            "discounts": [],
+            "sku": null,
+            "grams": 0,
+            "vendor": "EzPrintHouz",
+            "taxable": true,
+            "product_id": 8593014718737,
+            "product_has_only_default_variant": false,
+            "gift_card": false,
+            "final_price": 3600,
+            "final_line_price": 3600,
+            "url": "/products/uv-dtf-transfers-stickers-build-your-gang-sheets?variant=45965700071697",
+            "featured_image": {
+                "aspect_ratio": 1,
+                "alt": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS",
+                "height": 800,
+                "url": "https://cdn.shopify.com/s/files/1/0688/6195/2273/files/359384791_279303361310787_2768581040788819637_n_05d49095-ff84-4b6f-b6d3-04ff9c0fc8bc.jpg?v=1689129139",
+                "width": 800
+            },
+            "image": "https://cdn.shopify.com/s/files/1/0688/6195/2273/files/359384791_279303361310787_2768581040788819637_n_05d49095-ff84-4b6f-b6d3-04ff9c0fc8bc.jpg?v=1689129139",
+            "handle": "uv-dtf-transfers-stickers-build-your-gang-sheets",
+            "requires_shipping": true,
+            "product_type": "",
+            "product_title": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS",
+            "product_description": "Introducing Custom UV DTF Transfers: Elevate Your Hard Surfaces!\nTransform wood, laptops, drinkware, and more with our Custom UV DTF Transfers. Waterproof, scratch-resistant, and fade-proof, these transfers are perfect for non-clothing items. Dishwasher safe and long-lasting, they bring your designs to life.\nDesign Guidelines:\n\nUpload files in 300DPI, sized at 22 inches by your chosen height.\nUse PNG or PDF format.\nRemove backgrounds, avoid mirroring, and check edges for a seamless look.\nSmall text under 8px and intricate details are not recommended.\n\nYour Vision, Our Commitment: You're responsible for the final design output. Reprints require full payment unless design and editing services were requested.\nUnlock the potential of your hard surfaces with Custom UV DTF Transfers. Stand out, make a statement, and leave a lasting impression. Contact us today to bring your vision to life!",
+            "variant_title": "22x24",
+            "variant_options": [
+                "22x24"
+            ],
+            "options_with_values": [
+                {
+                    "name": "Size",
+                    "value": "22x24"
+                }
+            ],
+            "line_level_discount_allocations": [],
+            "line_level_total_discount": 0,
+            "has_components": false
+        },
+        {
+            "id": 45965700071697,
+            "properties": {
+                "_clientDesignId": "27ffa4d77cee42338a159344b91acd06",
+                "_projectId": "OpzFPMHl3Q",
+                "design": "https://designer.antigro.com/en?clientDesignId=27ffa4d77cee42338a159344b91acd06"
+            },
+            "quantity": 1,
+            "variant_id": 45965700071697,
+            "key": "45965700071697:07f88402-34a9-45a0-9e97-3f264bffb3e0",
+            "title": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS - 22x24",
+            "price": 3600,
+            "original_price": 3600,
+            "discounted_price": 3600,
+            "line_price": 3600,
+            "original_line_price": 3600,
+            "total_discount": 0,
+            "discounts": [],
+            "sku": null,
+            "grams": 0,
+            "vendor": "EzPrintHouz",
+            "taxable": true,
+            "product_id": 8593014718737,
+            "product_has_only_default_variant": false,
+            "gift_card": false,
+            "final_price": 3600,
+            "final_line_price": 3600,
+            "url": "/products/uv-dtf-transfers-stickers-build-your-gang-sheets?variant=45965700071697",
+            "featured_image": {
+                "aspect_ratio": 1,
+                "alt": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS",
+                "height": 800,
+                "url": "https://cdn.shopify.com/s/files/1/0688/6195/2273/files/359384791_279303361310787_2768581040788819637_n_05d49095-ff84-4b6f-b6d3-04ff9c0fc8bc.jpg?v=1689129139",
+                "width": 800
+            },
+            "image": "https://cdn.shopify.com/s/files/1/0688/6195/2273/files/359384791_279303361310787_2768581040788819637_n_05d49095-ff84-4b6f-b6d3-04ff9c0fc8bc.jpg?v=1689129139",
+            "handle": "uv-dtf-transfers-stickers-build-your-gang-sheets",
+            "requires_shipping": true,
+            "product_type": "",
+            "product_title": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS",
+            "product_description": "Introducing Custom UV DTF Transfers: Elevate Your Hard Surfaces!\nTransform wood, laptops, drinkware, and more with our Custom UV DTF Transfers. Waterproof, scratch-resistant, and fade-proof, these transfers are perfect for non-clothing items. Dishwasher safe and long-lasting, they bring your designs to life.\nDesign Guidelines:\n\nUpload files in 300DPI, sized at 22 inches by your chosen height.\nUse PNG or PDF format.\nRemove backgrounds, avoid mirroring, and check edges for a seamless look.\nSmall text under 8px and intricate details are not recommended.\n\nYour Vision, Our Commitment: You're responsible for the final design output. Reprints require full payment unless design and editing services were requested.\nUnlock the potential of your hard surfaces with Custom UV DTF Transfers. Stand out, make a statement, and leave a lasting impression. Contact us today to bring your vision to life!",
+            "variant_title": "22x24",
+            "variant_options": [
+                "22x24"
+            ],
+            "options_with_values": [
+                {
+                    "name": "Size",
+                    "value": "22x24"
+                }
+            ],
+            "line_level_discount_allocations": [],
+            "line_level_total_discount": 0,
+            "has_components": false
+        },
+        {
+            "id": 45965700071697,
+            "properties": {
+                "_clientDesignId": "41b74196b1a142d4bf96399c4a764ac0",
+                "_projectId": "VG8azcBSZR",
+                "design": "https://designer.antigro.com/en?clientDesignId=41b74196b1a142d4bf96399c4a764ac0"
+            },
+            "quantity": 2,
+            "variant_id": 45965700071697,
+            "key": "45965700071697:a1c29ad3-c605-4c8b-be27-6f7c0516cc0d",
+            "title": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS - 22x24",
+            "price": 3600,
+            "original_price": 3600,
+            "discounted_price": 3600,
+            "line_price": 7200,
+            "original_line_price": 7200,
+            "total_discount": 0,
+            "discounts": [],
+            "sku": null,
+            "grams": 0,
+            "vendor": "EzPrintHouz",
+            "taxable": true,
+            "product_id": 8593014718737,
+            "product_has_only_default_variant": false,
+            "gift_card": false,
+            "final_price": 3600,
+            "final_line_price": 7200,
+            "url": "/products/uv-dtf-transfers-stickers-build-your-gang-sheets?variant=45965700071697",
+            "featured_image": {
+                "aspect_ratio": 1,
+                "alt": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS",
+                "height": 800,
+                "url": "https://cdn.shopify.com/s/files/1/0688/6195/2273/files/359384791_279303361310787_2768581040788819637_n_05d49095-ff84-4b6f-b6d3-04ff9c0fc8bc.jpg?v=1689129139",
+                "width": 800
+            },
+            "image": "https://cdn.shopify.com/s/files/1/0688/6195/2273/files/359384791_279303361310787_2768581040788819637_n_05d49095-ff84-4b6f-b6d3-04ff9c0fc8bc.jpg?v=1689129139",
+            "handle": "uv-dtf-transfers-stickers-build-your-gang-sheets",
+            "requires_shipping": true,
+            "product_type": "",
+            "product_title": "UV DTF TRANSFERS (STICKERS) - BUILD YOUR GANG SHEETS",
+            "product_description": "Introducing Custom UV DTF Transfers: Elevate Your Hard Surfaces!\nTransform wood, laptops, drinkware, and more with our Custom UV DTF Transfers. Waterproof, scratch-resistant, and fade-proof, these transfers are perfect for non-clothing items. Dishwasher safe and long-lasting, they bring your designs to life.\nDesign Guidelines:\n\nUpload files in 300DPI, sized at 22 inches by your chosen height.\nUse PNG or PDF format.\nRemove backgrounds, avoid mirroring, and check edges for a seamless look.\nSmall text under 8px and intricate details are not recommended.\n\nYour Vision, Our Commitment: You're responsible for the final design output. Reprints require full payment unless design and editing services were requested.\nUnlock the potential of your hard surfaces with Custom UV DTF Transfers. Stand out, make a statement, and leave a lasting impression. Contact us today to bring your vision to life!",
+            "variant_title": "22x24",
+            "variant_options": [
+                "22x24"
+            ],
+            "options_with_values": [
+                {
+                    "name": "Size",
+                    "value": "22x24"
+                }
+            ],
+            "line_level_discount_allocations": [],
+            "line_level_total_discount": 0,
+            "has_components": false
+        }
+    ],
+    "requires_shipping": true,
+    "currency": "USD",
+    "items_subtotal_price": 14400,
+    "cart_level_discount_applications": []
+}
 
-//     // If "variant" parameter is not present, check for "product/"
-//     const productMatch = url.match(/\/products\/([^\/]+)/);
-//     if (productMatch) {
-//         return { text: productMatch[1], type: 'product' }; // Return the text after "product/"
-//     }
 
-//     // Return null if no match is found
-//     return null;
-// }
-
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-
-
-//     let product_page = window.location.href;
-//     if (product_page.includes("products/")) {
-//         // Find the form element with the specified class
-//         var formElement = document.querySelector('.product-form__buttons');
-
-//         // Check if the form element exists
-//         if (formElement) {
-
-//             // Create a new button element
-//             var newButton = document.createElement('button');
-//             newButton.id = 'custom_designButton';
-//             newButton.style.backgroundColor = '#fad71e';
-//             newButton.style.color = 'black';
-//             newButton.style.padding = '10px 30px';
-//             newButton.style.fontSize = '18px';
-//             newButton.style.fontWeight = '700';
-//             newButton.style.marginTop = "40px";
-//             newButton.textContent = 'Create design';
-
-//             // Append the new button to the end of the form
-//             formElement.appendChild(newButton);
-
-//             // Add a click event listener to the new button
-//             newButton.addEventListener('click', function () {
-//                 console.log("action on new button", newButton)
-
-//                 // Get the current URL
-//                 var currentUrl = window.location.href;
-//                 let extractText = extractTextFromUrl(currentUrl);
-
-//                 if (extractText !== null) {
-
-//                     if (extractText.type == "variant") {
-//                         var redirectUrl = 'http://localhost:3000?variant=' + extractText.text;
-//                         window.location.href = redirectUrl;
-//                     }
-//                     if (extractText.type == "product") {
-//                         var redirectUrl = 'http://localhost:3000?product=' + extractText.text;
-//                         window.location.href = redirectUrl;
-
-//                     }
-//                     //test
-//                 }
-//             });
-//         }
-
-//     }
-
-
-// });
+const myBackend = "http://127.0.0.1:5500/index.html"
 
 
 async function initializeScript() {
+    let myData = {}
+    function transformPropertiesToUrl() {
+        // ... (transforms properties to URLs in the DOM)
+        const urlString = 'https://ezprinthouz.com/cart?clientDesignId=78938d10ec23456da0a5eecdff45a214&projectIds=xw6l29v03C&projectVolumes=1&projectVariantIds=45965700071697';
+        const url = new URL(urlString);
+        const params = new URLSearchParams(url.search);
+        const clientDesignId = params.get('clientDesignId');
+        const projectIds = params.get('projectIds');
+        const projectVolumes = params.get('projectVolumes');
+        const projectVariantIds = params.get('projectVariantIds');
+        const shopifyCartUrl = window.location.origin
+        if (clientDesignId.length < 1) {
+            myData.urlParams.comeFromUrl = false
+            return
+        }
+        myData.urlParams = {
+            comeFromUrl: true,
+            clientDesignId,
+            projectIds,
+            projectVolumes,
+            projectVariantIds,
+            shopifyCartUrl
+        }
+    }
+    transformPropertiesToUrl()
     function loadCart() {
         // ... (fetches and returns cart data)
+        return TemporaryCart
         return fetch('/cart.js', {
             method: 'GET',
             headers: {
@@ -90,13 +228,64 @@ async function initializeScript() {
             .catch(function (err) {
                 throw err;
             })
-    } loadCart
-    const currentCart = await loadCart();
-    console.log(currentCart)
+    }
+    myData.currentCart = await loadCart();
+
+    async function addVariantsRequest(productToAdd) {
+        // ... (adds Varlets to the cart and returns the result)
+        return fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;'
+            },
+            body: JSON.stringify({ items: productToAdd })
+        })
+            .then(function (response) {
+                return response.json();
+            })
+
+    }
+
+    function generateThumbUrl() {
+        if (myData.urlParams.comeFromUrl.clientDesignId) {
+            return `${myBackend}?clientDesignId=${myData.urlParams.comeFromUrl.clientDesignId}`
+        }
+        return null
+    }
+
+
+
+    function addProperties() {
+        if (myData.urlParams.comeFromUrl == false) {
+            return false
+        }
+
+        thumbUrl = generateThumbUrl()
+        // ... (adds properties to the cart and returns the result)
+        return {
+            id: myData.urlParams.comeFromUrl.projectVariantIds,
+            quantity: myData.urlParams.comeFromUrl.projectVolumes,
+            properties: {
+                clientDesignId: myData.urlParams.comeFromUrl.clientDesignId,
+                projectId: myData.urlParams.comeFromUrl.projectIds,
+                thumbUrl: thumbUrl,
+            }
+        }
+
+    }
+
+    async function manageCartAdd() {
+        const productToAdd = addProperties()
+        if (typeof (productToAdd) == "boolean" && productToAdd == false) {
+            return
+        }
+        const result = await addVariantsRequest(productToAdd)()
+        // reload cart to remove get params
+        window.location.href = myData?.urlParams?.shopifyCartUrl;
+    }
+
+    manageCartAdd()
 }
-
-console.log("page yet loaded")
-
 document?.addEventListener('DOMContentLoaded', function () {
     console.log("page loaded")
     initializeScript();
