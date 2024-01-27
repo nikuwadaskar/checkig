@@ -201,7 +201,7 @@ async function initializeScript() {
         const projectVolumes = params.get('projectVolumes');
         const projectVariantIds = params.get('projectVariantIds');
         const shopifyCartUrl = window.location.origin
-        if (clientDesignId.length < 1) {
+        if (clientDesignId && clientDesignId.length < 1) {
             return false
         }
         return {
