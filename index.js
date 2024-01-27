@@ -187,7 +187,6 @@ const myBackend = "http://127.0.0.1:5500/index.html"
 async function initializeScript() {
     let myData = {}
     myData.urlParams = transformPropertiesToUrl()
-    console.log(myData)
     //myData?.urlParams?.comeFromUrl = false
     myData.currentCart = await loadCart();
     manageCartAdd()
@@ -282,7 +281,6 @@ async function initializeScript() {
             return;
         }
         else{
-            console.log("here")
             const result = await addVariantsRequest(productToAdd)
             // window.location.href = myData?.urlParams?.shopifyCartUrl;
         }
@@ -298,10 +296,9 @@ async function initializeScript() {
             // Call the original fetch function
             return originalFetch(url, options)
                 .then(response => {
-                    console.log('Fetch request completed successfully. URL:', url);
                     // You can add your own custom logic here for successful requests
                     if (url.includes("change")) {
-                        //manageChangeButton()
+                        manageChangeButton()
                     }
                     return response;
                 })
@@ -316,7 +313,6 @@ async function initializeScript() {
         // myData.currentCart.items.map(()=>{
         TemporaryCart.items.map((item) => {
             const currentVolume = editButton(item)
-            console.log("currentVolume")
         })
     }
 
@@ -344,10 +340,9 @@ async function initializeScript() {
 
 
     function editButton(item) {
-        console.log(document.querySelectorAll(".cart-item"))
+        console.log(item)
 
         document.querySelectorAll(".cart-item").forEach((elem) => {
-            console.log("elem", elem)
             const cartVolumeElem = elem.querySelector(".cart-item__details")
             const elemAnchor = createElemStructure(item)
             cartVolumeElem.appendChild(elemAnchor)
@@ -380,7 +375,13 @@ async function initializeScript() {
 
     }
     function getToOurEnd(elem) {
-        console.log(elem)
+    }
+
+    async function manageChangeButton(){
+        
+      //? myData.currentCart = await loadCart(); // uncomment this and comment below 
+      
+        myData.currentCart = TemporaryCart
     }
 
 
