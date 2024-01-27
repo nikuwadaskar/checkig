@@ -186,10 +186,10 @@ const myBackend = "http://127.0.0.1:5500/index.html"
 //? cart update hone ke baad edit button ka url bhi update hone chahiye 
 async function initializeScript() {
     let myData = {}
-    // myData.urlParams = transformPropertiesToUrl()
-    // myData?.urlParams?.comeFromUrl = false
-    // myData.currentCart = await loadCart();
-    //manageCartAdd()
+    myData.urlParams = transformPropertiesToUrl()
+    myData?.urlParams?.comeFromUrl = false
+    myData.currentCart = await loadCart();
+    manageCartAdd()
     function transformPropertiesToUrl() {
         // ... (transforms properties to URLs in the DOM)
         const urlString = 'https://ezprinthouz.com/cart?clientDesignId=78938d10ec23456da0a5eecdff45a214&projectIds=xw6l29v03C&projectVolumes=1&projectVariantIds=45965700071697';
