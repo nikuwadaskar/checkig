@@ -53,6 +53,7 @@ async function initializeScript() {
     }
 
     function addProperties() {
+        console.log(myData?.urlParams?.comeFromUrl)
         if (myData?.urlParams?.comeFromUrl === true) {
             const thumbUrl = generateThumbUrl();
             return {
@@ -71,6 +72,7 @@ async function initializeScript() {
 
     async function manageCartAdd() {
         const productToAdd = addProperties();
+        console.log(productToAdd);
         if (productToAdd === false) {
             return;
         } else {
