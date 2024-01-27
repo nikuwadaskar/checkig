@@ -4,6 +4,7 @@ const myBackend = "http://127.0.0.1:5500/index.html"
 async function initializeScript() {
     function transformPropertiesToUrl(currentHref, check) {
         const urlString = check ? currentHref : window.location.href;
+        console.log(urlString)
         const url = new URL(urlString);
         const params = new URLSearchParams(url.search);
         const clientDesignId = params.get('clientDesignId');
@@ -11,6 +12,7 @@ async function initializeScript() {
         const projectVolumes = params.get('projectVolumes');
         const projectVariantIds = params.get('projectVariantIds');
         const shopifyCartUrl = window.location.origin;
+        console.log(shopifyCartUrl, clientDesignId, projectIds, projectVolumes, projectVariantIds)
         if (typeof (clientDesignId) == "undefined") {
             return false;
         } else {
