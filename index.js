@@ -187,7 +187,7 @@ const myBackend = "http://127.0.0.1:5500/index.html"
 async function initializeScript() {
     let myData = {}
     myData.urlParams = transformPropertiesToUrl()
-    myData?.urlParams?.comeFromUrl = false
+    //myData?.urlParams?.comeFromUrl = false
     myData.currentCart = await loadCart();
     manageCartAdd()
     function transformPropertiesToUrl() {
