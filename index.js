@@ -190,9 +190,9 @@ async function initializeScript() {
     //myData?.urlParams?.comeFromUrl = false
     myData.currentCart = await loadCart();
     manageCartAdd()
-    function transformPropertiesToUrl(url, check) {
+    function transformPropertiesToUrl(currentHref, check) {
         // ... (transforms properties to URLs in the DOM)
-        const urlString = check ? url : window.location.href;
+        const urlString = check ? currentHref : window.location.href;
         const url = new URL(urlString);
         const params = new URLSearchParams(url.search);
         const clientDesignId = params.get('clientDesignId');
@@ -384,7 +384,7 @@ async function initializeScript() {
         myData.currentCart = TemporaryCart
         document.querySelectorAll(".edit-link-url").forEach((elem, index) => {
             const currentHref = elem?.href;
-            const currentUrlParams = transformPropertiesToUrl(currentHref)
+            const currentUrlParams = transformPropertiesToUrl(currentHref, true)
             if (currentUrlParams) {
                 if (String(myData.currentCart.items[index].quantity) != String(currentUrlParams.projectVolumes)) {
                     elem.href = createURL(myData.currentCart.items[index].quantity, myData.currentCart.items[index].properties)
