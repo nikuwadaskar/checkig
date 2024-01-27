@@ -256,10 +256,10 @@ async function initializeScript() {
     }
 
     function addProperties() {
-        if (myData.urlParams.comeFromUrl == false) {
+        if (myData?.urlParams && myData?.urlParams.comeFromUrl && myData?.urlParams.comeFromUrl == false) {
             return false
-        }
-
+        }else{
+            
         thumbUrl = generateThumbUrl()
         // ... (adds properties to the cart and returns the result)
         return {
@@ -271,6 +271,8 @@ async function initializeScript() {
                 thumbUrl: thumbUrl,
             }
         }
+        }
+
 
     }
 
@@ -280,8 +282,9 @@ async function initializeScript() {
             return;
         }
         else{
+            console.log("here")
             const result = await addVariantsRequest(productToAdd)
-            window.location.href = myData?.urlParams?.shopifyCartUrl;
+            // window.location.href = myData?.urlParams?.shopifyCartUrl;
         }
     }
 
