@@ -185,7 +185,7 @@ const myBackend = "http://127.0.0.1:5500/index.html"
 
 //? cart update hone ke baad edit button ka url bhi update hone chahiye 
 async function initializeScript() {
-  
+
     function transformPropertiesToUrl(currentHref, check) {
         // ... (transforms properties to URLs in the DOM)
         const urlString = check ? currentHref : window.location.href;
@@ -251,9 +251,7 @@ async function initializeScript() {
     }
 
     function addProperties() {
-        if (myData?.urlParams && myData?.urlParams.comeFromUrl && myData?.urlParams.comeFromUrl == false) {
-            return false
-        } else {
+        if (myData?.urlParams && myData?.urlParams.comeFromUrl && myData?.urlParams.comeFromUrl == true) {
 
             thumbUrl = generateThumbUrl()
             // ... (adds properties to the cart and returns the result)
@@ -266,9 +264,9 @@ async function initializeScript() {
                     thumbUrl: thumbUrl,
                 }
             }
+        } else {
+            return false
         }
-
-
     }
 
     async function manageCartAdd() {
@@ -293,8 +291,8 @@ async function initializeScript() {
             return originalFetch(url, options)
                 .then(response => {
                     // You can add your own custom logic here for successful requests
+                    console.log('URL:', url);
                     if (url.includes("change")) {
-                        console.log('URL:', url);
                         manageChangeButton()
                     }
                     return response;
