@@ -66,8 +66,8 @@ TemporaryCart = {
         {
             "id": 45965700071697,
             "properties": {
-                "_clientDesignId": "27ffa4d77cee42338a159344b91acd06",
-                "_projectId": "OpzFPMHl3Q",
+                "clientDesignId": "27ffa4d77cee42338a159344b91acd06",
+                "projectId": "OpzFPMHl3Q",
                 "design": "https://designer.antigro.com/en?clientDesignId=27ffa4d77cee42338a159344b91acd06"
             },
             "quantity": 1,
@@ -190,9 +190,9 @@ async function initializeScript() {
     //myData?.urlParams?.comeFromUrl = false
     myData.currentCart = await loadCart();
     manageCartAdd()
-    function transformPropertiesToUrl() {
+    function transformPropertiesToUrl(url, check) {
         // ... (transforms properties to URLs in the DOM)
-        const urlString = window.location.href;
+        const urlString = check ? url : window.location.href;
         const url = new URL(urlString);
         const params = new URLSearchParams(url.search);
         const clientDesignId = params.get('clientDesignId');
@@ -257,19 +257,19 @@ async function initializeScript() {
     function addProperties() {
         if (myData?.urlParams && myData?.urlParams.comeFromUrl && myData?.urlParams.comeFromUrl == false) {
             return false
-        }else{
-            
-        thumbUrl = generateThumbUrl()
-        // ... (adds properties to the cart and returns the result)
-        return {
-            id: myData.urlParams.comeFromUrl.projectVariantIds,
-            quantity: myData.urlParams.comeFromUrl.projectVolumes,
-            properties: {
-                clientDesignId: myData.urlParams.comeFromUrl.clientDesignId,
-                projectId: myData.urlParams.comeFromUrl.projectIds,
-                thumbUrl: thumbUrl,
+        } else {
+
+            thumbUrl = generateThumbUrl()
+            // ... (adds properties to the cart and returns the result)
+            return {
+                id: myData.urlParams.comeFromUrl.projectVariantIds,
+                quantity: myData.urlParams.comeFromUrl.projectVolumes,
+                properties: {
+                    clientDesignId: myData.urlParams.comeFromUrl.clientDesignId,
+                    projectId: myData.urlParams.comeFromUrl.projectIds,
+                    thumbUrl: thumbUrl,
+                }
             }
-        }
         }
 
 
@@ -280,7 +280,7 @@ async function initializeScript() {
         if (typeof (productToAdd) == "boolean" && productToAdd == false) {
             return;
         }
-        else{
+        else {
             const result = await addVariantsRequest(productToAdd)
             // window.location.href = myData?.urlParams?.shopifyCartUrl;
         }
@@ -360,7 +360,7 @@ async function initializeScript() {
             const url = createURL(item.quantity, item.properties)
             const editLink = document.createElement('a');
             editLink.href = url;
-            editLink.classList.add('button', 'button--primary');
+            editLink.classList.add('button', 'button--primary', 'edit-link-url');
             editLink.textContent = 'Edit';
 
             container.appendChild(designLabel);
@@ -377,17 +377,27 @@ async function initializeScript() {
     function getToOurEnd(elem) {
     }
 
-    async function manageChangeButton(){
-        
-      //? myData.currentCart = await loadCart(); // uncomment this and comment below 
-      
+    async function manageChangeButton() {
+
+        //? myData.currentCart = await loadCart(); // uncomment this and comment below 
+
         myData.currentCart = TemporaryCart
+        document.querySelectorAll(".edit-link-url").forEach((elem, index) => {
+            const currentHref = elem?.href;
+            const currentUrlParams = transformPropertiesToUrl(currentHref)
+            if (currentUrlParams) {
+                if (String(myData.currentCart.items[index].quantity) != String(currentUrlParams.projectVolumes)) {
+                    elem.href = createURL(myData.currentCart.items[index].quantity, myData.currentCart.items[index].properties)
+                }
+            }
+        })
+
     }
 
 
 }
 
 document?.addEventListener('DOMContentLoaded', function () {
-initializeScript();
+    initializeScript();
 })
 
