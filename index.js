@@ -183,7 +183,7 @@ TemporaryCart = {
 
 const myBackend = "http://127.0.0.1:5500/index.html"
 
-
+//? cart update hone ke baad edit button ka url bhi update hone chahiye 
 async function initializeScript() {
     let myData = {}
     // myData.urlParams = transformPropertiesToUrl()
@@ -282,8 +282,7 @@ async function initializeScript() {
         // reload cart to remove get params
         window.location.href = myData?.urlParams?.shopifyCartUrl;
     }
-  
-    console.log(",dbvzkjdb")
+
 
     /// Manage cart section 
     (function () {
@@ -296,31 +295,106 @@ async function initializeScript() {
                 .then(response => {
                     console.log('Fetch request completed successfully. URL:', url);
                     // You can add your own custom logic here for successful requests
-                    if(url.includes("change")){
+                    if (url.includes("change")) {
                         manageChangeButton()
                     }
                     return response;
                 })
                 .catch(error => {
                     console.error('Error in fetch request. URL:', url, 'Error:', error);
-                   
+
                 });
         };
     })();
     manageEditButton()
     function manageEditButton() {
-        document.getElementById("edit-button-link").addEventListener("click", getToOurEnd(elem))
+        //myData.currentCart.items.map(()=>{
+        TemporaryCart.items.map((item) => {
+            const currentVolume = editButton(item)
+            const url = createURL(item.quantity, item.properties)
+            if (status)
+                document.getElementById("edit-button-link").addEventListener("click", getToOurEnd(elem))
+        })
     }
 
-    function getToOurEnd (elem) {
-    console.log(elem)
+    // function editButton() {
+    //     document.querySelectorAll("cart-items").forEach((elem) => {
+
+    //     })
+    // }
+
+    function createURL(quantity, prop) {
+        const queryParamsObject = {
+            clientDesignId: prop?.clientDesignId,
+            projectIds: prop?.projectId,
+            projectVolumes: quantity
+        }
+        function objectToQueryString(obj) {
+            const params = new URLSearchParams();
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    params.append(key, obj[key]);
+                }
+            }
+            return params.toString();
+        }
+
+        // Create the URL with query parameters
+        const queryString = objectToQueryString(queryParamsObject);
+        const finalUrl = `${myBackend}?${queryString}`;
+        return finalUrl;
     }
-    
+
+    function getToOurEnd(elem) {
+        console.log(elem)
+    }
+
 
 }
 
 document?.addEventListener('DOMContentLoaded', function () {
+    editButton()
     console.log("page loaded")
 })
 initializeScript();
-console.log("page not loaded")
+
+
+function editButton(item) {
+    console.log(document.querySelectorAll(".cart-item"))
+
+    document.querySelectorAll(".cart-item").forEach((elem) => {
+        console.log("elem", elem)
+        const cartVolumeElem = elem.querySelector(".cart-item__details")
+        const elemAnchor = createElemStructure(item)
+        cartVolumeElem.appendChild(elemAnchor)
+    })
+}
+
+function createElemStructure(item) {
+    function createCartItem(clientDesignId, projectIds, projectVolumes) {
+        const container = document.createElement('div');
+        container.classList.add('cart__item--properties');
+
+        const designLabel = document.createElement('span');
+        designLabel.textContent = 'design:';
+        designLabel.setAttribute('data-is-antigro-designer-link', 'y');
+
+        const editLink = document.createElement('a');
+        editLink.href = `${myBackend}?clientDesignId=${clientDesignId}&projectIds=${projectIds}&projectVolumes=${projectVolumes}`;
+        editLink.classList.add('button', 'button--primary');
+        editLink.textContent = 'Edit';
+
+        container.appendChild(designLabel);
+        container.appendChild(editLink);
+
+        return container;
+    }
+
+    const clientDesignId = item.properties.clientDesignId;
+    const projectIds = item.properties.projectId;
+    const projectVolumes = item.quantity;
+
+    const cartItem = createCartItem(clientDesignId, projectIds, projectVolumes);
+    return cartItem
+
+}
