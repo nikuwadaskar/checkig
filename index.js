@@ -11,8 +11,8 @@ TemporaryCart = {
         {
             "id": 45965700071697,
             "properties": {
-                "_clientDesignId": "78938d10ec23456da0a5eecdff45a214",
-                "_projectId": "xw6l29v03C",
+                "clientDesignId": "78938d10ec23456da0a5eecdff45a214",
+                "projectId": "xw6l29v03C",
                 "design": "https://designer.antigro.com/en?clientDesignId=78938d10ec23456da0a5eecdff45a214"
             },
             "quantity": 1,
@@ -121,8 +121,8 @@ TemporaryCart = {
         {
             "id": 45965700071697,
             "properties": {
-                "_clientDesignId": "41b74196b1a142d4bf96399c4a764ac0",
-                "_projectId": "VG8azcBSZR",
+                "clientDesignId": "41b74196b1a142d4bf96399c4a764ac0",
+                "projectId": "VG8azcBSZR",
                 "design": "https://designer.antigro.com/en?clientDesignId=41b74196b1a142d4bf96399c4a764ac0"
             },
             "quantity": 2,
@@ -276,21 +276,18 @@ async function initializeScript() {
         }
         else {
             const result = await addVariantsRequest(productToAdd)
-            // window.location.href = myData?.urlParams?.shopifyCartUrl;
+            window.location.href = myData?.urlParams?.shopifyCartUrl;
         }
     }
 
 
     /// Manage cart section 
     (function () {
-        // Store the original fetch function
         const originalFetch = window.fetch;
-        // Override the fetch function to log the URL after the request is completed
         window.fetch = function (url, options) {
             // Call the original fetch function
             return originalFetch(url, options)
                 .then(response => {
-                    // You can add your own custom logic here for successful requests
                     console.log('URL:', url);
                     if (url.includes("change")) {
                         manageChangeButton()
@@ -304,8 +301,7 @@ async function initializeScript() {
         };
     })();
     function manageEditButton() {
-        editButton(TemporaryCart.items)
-        //    editButton(myData.currentCart.items)
+        editButton(myData.currentCart.items)
     }
 
     function createURL(quantity, prop) {
@@ -329,7 +325,6 @@ async function initializeScript() {
         const finalUrl = `${myBackend}?${queryString}`;
         return finalUrl;
     }
-
 
     function editButton(items) {
         console.log(items)
@@ -366,14 +361,11 @@ async function initializeScript() {
         return cartItem
 
     }
-    function getToOurEnd(elem) {
-    }
 
     async function manageChangeButton() {
 
-        //? myData.currentCart = await loadCart(); // uncomment this and comment below 
+        myData.currentCart = await loadCart();
 
-        myData.currentCart = TemporaryCart
         document.querySelectorAll(".edit-link-url").forEach((elem, index) => {
             const currentHref = elem?.href;
             const currentUrlParams = transformPropertiesToUrl(currentHref, true)
@@ -385,14 +377,18 @@ async function initializeScript() {
         })
 
     }
-    manageEditButton()
 
 
+
+    //? Cart item added check
     let myData = {}
     myData.urlParams = transformPropertiesToUrl()
     //myData?.urlParams?.comeFromUrl = false
     myData.currentCart = await loadCart();
     manageCartAdd()
+
+    //? Manage Edit Button initialization
+    manageEditButton()
 
 }
 
