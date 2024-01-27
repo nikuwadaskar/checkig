@@ -148,6 +148,31 @@ async function initializeScript() {
             }
         });
     }
+    function createElemStructure(item) {
+        function createCartItem() {
+            const container = document.createElement('div');
+            container.classList.add('cart__item--properties');
+
+            const designLabel = document.createElement('span');
+            designLabel.textContent = 'design:';
+            designLabel.setAttribute('data-is-antigro-designer-link', 'y');
+            const url = createURL(item.quantity, item.properties)
+            const editLink = document.createElement('a');
+            editLink.href = url;
+            editLink.classList.add('button', 'button--primary', 'edit-link-url');
+            editLink.textContent = 'Edit';
+
+            container.appendChild(designLabel);
+            container.appendChild(editLink);
+
+            return container;
+        }
+
+
+        const cartItem = createCartItem();
+        return cartItem
+
+    }
 
     let myData = {};
     myData.urlParams = transformPropertiesToUrl();
