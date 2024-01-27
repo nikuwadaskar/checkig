@@ -50,8 +50,8 @@ async function initializeScript() {
     }
 
     function generateThumbUrl() {
-        return myData?.urlParams?.comeFromUrl?.clientDesignId
-            ? `${myBackend}?clientDesignId=${myData.urlParams.comeFromUrl.clientDesignId}`
+        return myData?.urlParams?.clientDesignId
+            ? `${myBackend}?clientDesignId=${myData.urlParams.clientDesignId}`
             : null;
     }
 
@@ -60,11 +60,11 @@ async function initializeScript() {
         if (myData?.urlParams?.comeFromUrl === true && myData?.urlParams?.clientDesignId != undefined) {
             const thumbUrl = generateThumbUrl();
             return {
-                id: myData.urlParams.comeFromUrl.projectVariantIds,
-                quantity: myData.urlParams.comeFromUrl.projectVolumes,
+                id: myData.urlParams.projectVariantIds,
+                quantity: myData.urlParams.projectVolumes,
                 properties: {
-                    clientDesignId: myData.urlParams.comeFromUrl.clientDesignId,
-                    projectId: myData.urlParams.comeFromUrl.projectIds,
+                    clientDesignId: myData.urlParams.clientDesignId,
+                    projectId: myData.urlParams.projectIds,
                     thumbUrl,
                 }
             };
@@ -80,7 +80,10 @@ async function initializeScript() {
             return;
         } else {
             const result = await addVariantsRequest(productToAdd);
-            window.location.href = myData?.urlParams?.shopifyCartUrl;
+            console.log(result)
+            if (result.ok) {
+                window.location.href = myData?.urlParams?.shopifyCartUrl;
+            }
         }
     }
 
