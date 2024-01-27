@@ -11,9 +11,9 @@ async function initializeScript() {
         const projectVolumes = params.get('projectVolumes');
         const projectVariantIds = params.get('projectVariantIds');
         const shopifyCartUrl = window.location.origin;
-        if (typeof(clientDesignId)=="undefined") {
+        if (typeof (clientDesignId) == "undefined") {
             return false;
-        }else{
+        } else {
             return {
                 comeFromUrl: true,
                 clientDesignId,
@@ -54,8 +54,8 @@ async function initializeScript() {
     }
 
     function addProperties() {
-        console.log(myData?.urlParams?.comeFromUrl)
-        if (myData?.urlParams?.comeFromUrl === true) {
+        console.log(myData?.urlParams?.comeFromUrl, myData?.urlParams?.clientDesignId, typeof (myData?.urlParams?.clientDesignId))
+        if (myData?.urlParams?.comeFromUrl === true && myData?.urlParams?.clientDesignId != undefined) {
             const thumbUrl = generateThumbUrl();
             return {
                 id: myData.urlParams.comeFromUrl.projectVariantIds,
