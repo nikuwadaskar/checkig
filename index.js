@@ -277,11 +277,12 @@ async function initializeScript() {
     async function manageCartAdd() {
         const productToAdd = addProperties()
         if (typeof (productToAdd) == "boolean" && productToAdd == false) {
-            return
+            return;
         }
-        const result = await addVariantsRequest(productToAdd)
-        // reload cart to remove get params
-        window.location.href = myData?.urlParams?.shopifyCartUrl;
+        else{
+            const result = await addVariantsRequest(productToAdd)
+            window.location.href = myData?.urlParams?.shopifyCartUrl;
+        }
     }
 
 
@@ -312,7 +313,7 @@ async function initializeScript() {
         // myData.currentCart.items.map(()=>{
         TemporaryCart.items.map((item) => {
             const currentVolume = editButton(item)
-            console("currentVolume")
+            console.log("currentVolume")
         })
     }
 
