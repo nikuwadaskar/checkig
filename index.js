@@ -187,12 +187,13 @@ const myBackend = "http://127.0.0.1:5500/index.html"
 async function initializeScript() {
     let myData = {}
     myData.urlParams = transformPropertiesToUrl()
+    console.log(myData)
     //myData?.urlParams?.comeFromUrl = false
     myData.currentCart = await loadCart();
     manageCartAdd()
     function transformPropertiesToUrl() {
         // ... (transforms properties to URLs in the DOM)
-        const urlString = 'https://ezprinthouz.com/cart?clientDesignId=78938d10ec23456da0a5eecdff45a214&projectIds=xw6l29v03C&projectVolumes=1&projectVariantIds=45965700071697';
+        const urlString = window.location.href;
         const url = new URL(urlString);
         const params = new URLSearchParams(url.search);
         const clientDesignId = params.get('clientDesignId');
@@ -214,7 +215,7 @@ async function initializeScript() {
     }
     function loadCart() {
         // ... (fetches and returns cart data)
-        return TemporaryCart
+
         return fetch('/cart.js', {
             method: 'GET',
             headers: {
@@ -296,7 +297,7 @@ async function initializeScript() {
                     console.log('Fetch request completed successfully. URL:', url);
                     // You can add your own custom logic here for successful requests
                     if (url.includes("change")) {
-                        manageChangeButton()
+                        //manageChangeButton()
                     }
                     return response;
                 })
@@ -308,20 +309,12 @@ async function initializeScript() {
     })();
     manageEditButton()
     function manageEditButton() {
-        //myData.currentCart.items.map(()=>{
+        // myData.currentCart.items.map(()=>{
         TemporaryCart.items.map((item) => {
             const currentVolume = editButton(item)
-            const url = createURL(item.quantity, item.properties)
-            if (status)
-                document.getElementById("edit-button-link").addEventListener("click", getToOurEnd(elem))
+            console("currentVolume")
         })
     }
-
-    // function editButton() {
-    //     document.querySelectorAll("cart-items").forEach((elem) => {
-
-    //     })
-    // }
 
     function createURL(quantity, prop) {
         const queryParamsObject = {
@@ -345,6 +338,43 @@ async function initializeScript() {
         return finalUrl;
     }
 
+
+    function editButton(item) {
+        console.log(document.querySelectorAll(".cart-item"))
+
+        document.querySelectorAll(".cart-item").forEach((elem) => {
+            console.log("elem", elem)
+            const cartVolumeElem = elem.querySelector(".cart-item__details")
+            const elemAnchor = createElemStructure(item)
+            cartVolumeElem.appendChild(elemAnchor)
+        })
+    }
+
+    function createElemStructure(item) {
+        function createCartItem() {
+            const container = document.createElement('div');
+            container.classList.add('cart__item--properties');
+
+            const designLabel = document.createElement('span');
+            designLabel.textContent = 'design:';
+            designLabel.setAttribute('data-is-antigro-designer-link', 'y');
+            const url = createURL(item.quantity, item.properties)
+            const editLink = document.createElement('a');
+            editLink.href = url;
+            editLink.classList.add('button', 'button--primary');
+            editLink.textContent = 'Edit';
+
+            container.appendChild(designLabel);
+            container.appendChild(editLink);
+
+            return container;
+        }
+
+
+        const cartItem = createCartItem();
+        return cartItem
+
+    }
     function getToOurEnd(elem) {
         console.log(elem)
     }
@@ -353,48 +383,7 @@ async function initializeScript() {
 }
 
 document?.addEventListener('DOMContentLoaded', function () {
-    editButton()
     console.log("page loaded")
 })
 initializeScript();
 
-
-function editButton(item) {
-    console.log(document.querySelectorAll(".cart-item"))
-
-    document.querySelectorAll(".cart-item").forEach((elem) => {
-        console.log("elem", elem)
-        const cartVolumeElem = elem.querySelector(".cart-item__details")
-        const elemAnchor = createElemStructure(item)
-        cartVolumeElem.appendChild(elemAnchor)
-    })
-}
-
-function createElemStructure(item) {
-    function createCartItem(clientDesignId, projectIds, projectVolumes) {
-        const container = document.createElement('div');
-        container.classList.add('cart__item--properties');
-
-        const designLabel = document.createElement('span');
-        designLabel.textContent = 'design:';
-        designLabel.setAttribute('data-is-antigro-designer-link', 'y');
-
-        const editLink = document.createElement('a');
-        editLink.href = `${myBackend}?clientDesignId=${clientDesignId}&projectIds=${projectIds}&projectVolumes=${projectVolumes}`;
-        editLink.classList.add('button', 'button--primary');
-        editLink.textContent = 'Edit';
-
-        container.appendChild(designLabel);
-        container.appendChild(editLink);
-
-        return container;
-    }
-
-    const clientDesignId = item.properties.clientDesignId;
-    const projectIds = item.properties.projectId;
-    const projectVolumes = item.quantity;
-
-    const cartItem = createCartItem(clientDesignId, projectIds, projectVolumes);
-    return cartItem
-
-}
