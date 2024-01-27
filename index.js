@@ -185,11 +185,7 @@ const myBackend = "http://127.0.0.1:5500/index.html"
 
 //? cart update hone ke baad edit button ka url bhi update hone chahiye 
 async function initializeScript() {
-    let myData = {}
-    myData.urlParams = transformPropertiesToUrl()
-    //myData?.urlParams?.comeFromUrl = false
-    myData.currentCart = await loadCart();
-    manageCartAdd()
+  
     function transformPropertiesToUrl(currentHref, check) {
         // ... (transforms properties to URLs in the DOM)
         const urlString = check ? currentHref : window.location.href;
@@ -288,28 +284,27 @@ async function initializeScript() {
 
 
     /// Manage cart section 
-    manageEditButton()
-        (function () {
-            // Store the original fetch function
-            const originalFetch = window.fetch;
-            // Override the fetch function to log the URL after the request is completed
-            window.fetch = function (url, options) {
-                // Call the original fetch function
-                return originalFetch(url, options)
-                    .then(response => {
-                        // You can add your own custom logic here for successful requests
-                        if (url.includes("change")) {
-                            console.log('URL:', url);
-                            manageChangeButton()
-                        }
-                        return response;
-                    })
-                    .catch(error => {
-                        console.error('Error in fetch request. URL:', url, 'Error:', error);
+    (function () {
+        // Store the original fetch function
+        const originalFetch = window.fetch;
+        // Override the fetch function to log the URL after the request is completed
+        window.fetch = function (url, options) {
+            // Call the original fetch function
+            return originalFetch(url, options)
+                .then(response => {
+                    // You can add your own custom logic here for successful requests
+                    if (url.includes("change")) {
+                        console.log('URL:', url);
+                        manageChangeButton()
+                    }
+                    return response;
+                })
+                .catch(error => {
+                    console.error('Error in fetch request. URL:', url, 'Error:', error);
 
-                    });
-            };
-        })();
+                });
+        };
+    })();
     function manageEditButton() {
         editButton(TemporaryCart.items)
         //    editButton(myData.currentCart.items)
@@ -392,7 +387,14 @@ async function initializeScript() {
         })
 
     }
+    manageEditButton()
 
+
+    //   let myData = {}
+    myData.urlParams = transformPropertiesToUrl()
+    //myData?.urlParams?.comeFromUrl = false
+    myData.currentCart = await loadCart();
+    manageCartAdd()
 
 }
 
