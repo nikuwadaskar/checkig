@@ -390,7 +390,7 @@ async function initializeScript() {
     manageEditButton()
 
 
-    //   let myData = {}
+    let myData = {}
     myData.urlParams = transformPropertiesToUrl()
     //myData?.urlParams?.comeFromUrl = false
     myData.currentCart = await loadCart();
