@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-function initializeScript() {
+async function initializeScript() {
     function loadCart() {
         // ... (fetches and returns cart data)
         return fetch('/cart.js', {
@@ -91,7 +91,7 @@ function initializeScript() {
                 throw err;
             })
     } loadCart
-    const currentCart = loadCart();
+    const currentCart = await loadCart();
     console.log(currentCart)
 }
 
