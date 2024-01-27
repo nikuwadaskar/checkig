@@ -288,32 +288,31 @@ async function initializeScript() {
 
 
     /// Manage cart section 
-    (function () {
-        // Store the original fetch function
-        const originalFetch = window.fetch;
-        // Override the fetch function to log the URL after the request is completed
-        window.fetch = function (url, options) {
-            // Call the original fetch function
-            return originalFetch(url, options)
-                .then(response => {
-                    // You can add your own custom logic here for successful requests
-                    if (url.includes("change")) {
-                        manageChangeButton()
-                    }
-                    return response;
-                })
-                .catch(error => {
-                    console.error('Error in fetch request. URL:', url, 'Error:', error);
-
-                });
-        };
-    })();
     manageEditButton()
+        (function () {
+            // Store the original fetch function
+            const originalFetch = window.fetch;
+            // Override the fetch function to log the URL after the request is completed
+            window.fetch = function (url, options) {
+                // Call the original fetch function
+                return originalFetch(url, options)
+                    .then(response => {
+                        // You can add your own custom logic here for successful requests
+                        if (url.includes("change")) {
+                            console.log('URL:', url);
+                            manageChangeButton()
+                        }
+                        return response;
+                    })
+                    .catch(error => {
+                        console.error('Error in fetch request. URL:', url, 'Error:', error);
+
+                    });
+            };
+        })();
     function manageEditButton() {
-        // myData.currentCart.items.map(()=>{
-        TemporaryCart.items.map((item) => {
-            const currentVolume = editButton(item)
-        })
+        editButton(TemporaryCart.items)
+        //    editButton(myData.currentCart.items)
     }
 
     function createURL(quantity, prop) {
@@ -339,12 +338,12 @@ async function initializeScript() {
     }
 
 
-    function editButton(item) {
-        console.log(item)
+    function editButton(items) {
+        console.log(items)
 
-        document.querySelectorAll(".cart-item").forEach((elem) => {
+        document.querySelectorAll(".cart-item").forEach((elem, index) => {
             const cartVolumeElem = elem.querySelector(".cart-item__details")
-            const elemAnchor = createElemStructure(item)
+            const elemAnchor = createElemStructure(items[index])
             cartVolumeElem.appendChild(elemAnchor)
         })
     }
