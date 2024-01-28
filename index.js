@@ -73,19 +73,57 @@ async function initializeScript() {
         }
     }
 
+    function checkUpdateOrAdd(properties) {
+        if (myData.currentCart.items.length > 0) {
+          for (let item of myData.currentCart.items) {
+            if (item.properties.projectId === properties.projectId) {
+              item.properties.projectVolumes = myData.urlParams.projectVolumes;
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+      function updateCartItemsQuantity(cartItemsToUpdateQuantity) {
+        // ... (updates quantities of cart items)
+        if (Object.keys(cartItemsToUpdateQuantity).length === 0) {
+          return Promise.resolve();
+        }
+
+        return fetch('/cart/update.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;'
+          },
+          body: JSON.stringify({ updates: cartItemsToUpdateQuantity })
+        })
+          .then(function (response) {
+            return response.json();
+          })
+      }
+
     async function manageCartAdd() {
         const productToAdd = addProperties();
         console.log(productToAdd);
         if (productToAdd === false) {
             return;
         } else {
-            const result = await addVariantsRequest(productToAdd);
-            console.log(result)
+            let result
+            const shouldUpdate = checkUpdateOrAdd(productToAdd.properties);
+            if(shouldUpdate){
+                 result = await updateCartItemsQuantity()
+            }else{
+                result = await addVariantsRequest(productToAdd);
+            }
             if (result.ok) {
                 window.location.href = myData?.urlParams?.shopifyCartUrl;
+            }else{
+                console.error(result)
             }
         }
     }
+    
 
     (function () {
         const originalFetch = window.fetch;
