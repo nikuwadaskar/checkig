@@ -1,88 +1,3 @@
-const tempCart = {
-    "token": "Z2NwLXVzLWVhc3QxOjAxSE4yVjBCODFKMjJRQjVQREhNQUFGMTVT",
-    "note": "",
-    "attributes": {},
-    "original_total_price": 40000,
-    "total_price": 40000,
-    "total_discount": 0,
-    "total_weight": 0,
-    "item_count": 4,
-    "items": [
-        {
-            "id": 47418839400754,
-            "properties": {
-                "id": 47418839400754, // i will get this from the my backend 
-                "quantity": 1,
-                "properties": {
-                    "clientDesignId": "27ffa4d77cee42338a159344b91acd06",
-                    "projectId": "OpzFPMHl3Q",
-                    "design": "https://designer.antigro.com/en?clientDesignId=27ffa4d77cee42338a159344b91acd06"
-                }
-            },
-            "quantity": 4,
-            "variant_id": 47418839400754,
-            "key": "47418839400754:e79ae7c2-3e6c-4af6-bcba-55a373b51caa",
-            "title": "ADIDAS | CLASSIC BACKPACK | LEGEND INK MULTICOLOUR - OS / blue",
-            "price": 10000,
-            "original_price": 10000,
-            "discounted_price": 10000,
-            "line_price": 40000,
-            "original_line_price": 40000,
-            "total_discount": 0,
-            "discounts": [],
-            "sku": "AD-04\r\n-blue-OS",
-            "grams": 0,
-            "vendor": "ADIDAS",
-            "taxable": true,
-            "product_id": 8929761427762,
-            "product_has_only_default_variant": false,
-            "gift_card": false,
-            "final_price": 10000,
-            "final_line_price": 40000,
-            "url": "/products/adidas-classic-backpack-legend-ink-multicolour?variant=47418839400754",
-            "featured_image": {
-                "aspect_ratio": 1.134,
-                "alt": "ADIDAS | CLASSIC BACKPACK | LEGEND INK MULTICOLOUR",
-                "height": 560,
-                "url": "https://cdn.shopify.com/s/files/1/0701/6189/1634/products/8072c8b5718306d4be25aac21836ce16.jpg?v=1701069423",
-                "width": 635
-            },
-            "image": "https://cdn.shopify.com/s/files/1/0701/6189/1634/products/8072c8b5718306d4be25aac21836ce16.jpg?v=1701069423",
-            "handle": "adidas-classic-backpack-legend-ink-multicolour",
-            "requires_shipping": true,
-            "product_type": "SHOES",
-            "product_title": "ADIDAS | CLASSIC BACKPACK | LEGEND INK MULTICOLOUR",
-            "product_description": "The adidas BP Classic Cap features a pre-curved brim to keep your face shaded, while a hook-and-loop adjustable closure provides a comfortable fit. With a 3-Stripes design and reflective accents. The perfect piece to top off any outfit.",
-            "variant_title": "OS / blue",
-            "variant_options": [
-                "OS",
-                "blue"
-            ],
-            "options_with_values": [
-                {
-                    "name": "Size",
-                    "value": "OS"
-                },
-                {
-                    "name": "Color",
-                    "value": "blue"
-                }
-            ],
-            "line_level_discount_allocations": [],
-            "line_level_total_discount": 0,
-            "quantity_rule": {
-                "min": 1,
-                "max": null,
-                "increment": 1
-            },
-            "has_components": false
-        }
-    ],
-    "requires_shipping": true,
-    "currency": "INR",
-    "items_subtotal_price": 40000,
-    "cart_level_discount_applications": []
-}
 const myBackend = "http://127.0.0.1:5500/index.html"
 
 //? cart update hone ke baad edit button ka url bhi update hone chahiye 
@@ -159,15 +74,19 @@ async function initializeScript() {
     }
 
     function checkUpdateOrAdd(properties) {
+        console.log(myData.currentCart.items, properties)
         if (myData.currentCart.items.length > 0) {
-            for (let item of myData.currentCart.items) {
+            for (let item of myData?.currentCart.items) {
                 if (item.properties.projectId === properties.projectId) {
-                    item.properties.projectVolumes = myData.urlParams.projectVolumes;
-                    return false;
+                    if (String(item.properties.projectVolumes) == String(myData.urlParams.projectVolumes)) {
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
             }
         }
-        return true;
+        return false;
     }
 
     function updateCartItemsQuantity(cartItemsToUpdateQuantity) {
@@ -196,8 +115,9 @@ async function initializeScript() {
         } else {
             let result
             const shouldUpdate = checkUpdateOrAdd(productToAdd.properties);
+            console.log(shouldUpdate)
             if (shouldUpdate) {
-                result = await updateCartItemsQuantity()
+                result = await updateCartItemsQuantity(productToAdd)
             } else {
                 result = await addVariantsRequest(productToAdd);
             }
@@ -264,8 +184,7 @@ async function initializeScript() {
     }
 
     async function manageChangeButton() {
-        // myData.currentCart = await loadCart();
-        myData.currentCart = tempCart;
+        myData.currentCart = await loadCart();
 
         document.querySelectorAll(".edit-link-url").forEach((elem, index) => {
             const currentHref = elem?.href;
@@ -305,7 +224,7 @@ async function initializeScript() {
 
     let myData = {};
     myData.urlParams = transformPropertiesToUrl();
-    myData.currentCart = tempCart;
+    myData.currentCart = await loadCart();
     manageCartAdd();
     manageEditButton();
 }
