@@ -105,7 +105,7 @@ async function initializeScript() {
             headers: {
                 'Content-Type': 'application/json;'
             },
-            body: JSON.stringify({ data })
+            body: JSON.stringify(data)
         })
             .then(function (response) {
                 return response.json();
@@ -126,8 +126,9 @@ async function initializeScript() {
             } else {
                 result = await addVariantsRequest(productToAdd);
             }
+            console.log(result)
             if (result.ok) {
-                window.location.href = myData?.urlParams?.shopifyCartUrl;
+                window.location.href = window.location.origin+"/cart";
             } else {
                 console.error(result)
             }
