@@ -95,12 +95,17 @@ async function initializeScript() {
             return Promise.resolve();
         }
 
-        return fetch('/cart/update.js', {
+        const data = {
+            "id": cartItemsToUpdateQuantity?.id,
+            "quantity": cartItemsToUpdateQuantity?.quantity,
+        }
+
+        return fetch('/cart/change.js', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;'
             },
-            body: JSON.stringify({ updates: [cartItemsToUpdateQuantity] })
+            body: JSON.stringify({ data })
         })
             .then(function (response) {
                 return response.json();
