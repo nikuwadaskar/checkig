@@ -27,7 +27,7 @@ async function initializeScript() {
         }
     }
 
-    function loadCart() {
+    async function loadCart() {
         return fetch('/cart.js', {
             method: 'GET',
             headers: {
@@ -44,7 +44,7 @@ async function initializeScript() {
             headers: {
                 'Content-Type': 'application/json;'
             },
-            body: JSON.stringify({ items: productToAdd })
+            body: JSON.stringify({ items: [productToAdd] })
         })
             .then(response => response.json());
     }
@@ -89,7 +89,7 @@ async function initializeScript() {
         return false;
     }
 
-    function updateCartItemsQuantity(cartItemsToUpdateQuantity) {
+    async function updateCartItemsQuantity(cartItemsToUpdateQuantity) {
         // ... (updates quantities of cart items)
         if (Object.keys(cartItemsToUpdateQuantity).length === 0) {
             return Promise.resolve();
@@ -100,7 +100,7 @@ async function initializeScript() {
             headers: {
                 'Content-Type': 'application/json;'
             },
-            body: JSON.stringify({ updates: cartItemsToUpdateQuantity })
+            body: JSON.stringify({ updates: [cartItemsToUpdateQuantity] })
         })
             .then(function (response) {
                 return response.json();
