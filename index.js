@@ -46,7 +46,7 @@ async function initializeScript() {
             },
             body: JSON.stringify({ items: [productToAdd] })
         })
-            .then(response => response.json());
+            .then(response => true).catch((err) => false);;
     }
 
     function generateThumbUrl() {
@@ -108,8 +108,8 @@ async function initializeScript() {
             body: JSON.stringify(data)
         })
             .then(function (response) {
-                return response.json();
-            })
+                return true;
+            }).catch((err) => false);
     }
 
     async function manageCartAdd() {
@@ -127,10 +127,10 @@ async function initializeScript() {
                 result = await addVariantsRequest(productToAdd);
             }
             console.log(result)
-            if (result.ok) {
+            if (result) {
                 window.location.href = window.location.origin+"/cart";
             } else {
-                console.error(result)
+                alert("Something went wrong please reload the page")
             }
         }
     }
