@@ -51,6 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
             newButton.style.fontSize = '18px';
             newButton.style.fontWeight = '700';
             newButton.style.marginTop = "40px";
+            newButton.style.cursor = 'pointer';
+            newButton.style.width = '200px';
+            newButton.style.textAlign = 'center';
             newButton.textContent = 'Create design';
 
             // Append the new button to the end of the form
