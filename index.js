@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var formElement = document.querySelector('.product-form__buttons');
         // Check if the form element exists
         if (formElement) {
-
+            formElement.innerHTML=""
             // Create a new button element
-            var newButton = document.createElement('button');
+            var newButton = document.createElement('p');
             newButton.id = 'custom_designButton';
             newButton.style.backgroundColor = '#fad71e';
             newButton.style.color = 'black';
