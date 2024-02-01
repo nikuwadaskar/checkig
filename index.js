@@ -270,6 +270,19 @@ async function initializeScript() {
             const cartVolumeElem = elem.querySelector(".cart-item__details");
             const elemAnchor = createElemStructure(items[index]);
             cartVolumeElem.appendChild(elemAnchor);
+            const avl = document.querySelectorAll("dt")
+            avl.forEach((e)=>{
+                console.log(e)
+                if(e.innerHTML=="thumbUrl:"){
+                    e.parentNode.remove()
+               }
+                if(e.innerHTML=="projectId:"){
+                    e.parentNode.remove()
+               }
+                if(e.innerHTML=="clientDesignId:"){
+                    e.parentNode.remove()
+               }
+            })
         });
     }
 
