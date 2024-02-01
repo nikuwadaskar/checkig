@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Find the form element with the specified class
         var formElement = document.querySelector('.product-form__buttons');
+        const val = document.querySelector(".product-variant-id")?.value
         // Check if the form element exists
         if (formElement) {
             formElement.innerHTML=""
@@ -68,11 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (extractText !== null) {
                     if (extractText.type == "variant") {
-                        var redirectUrl = 'http://localhost:3000/variant/' + extractText.text + "/src/" + source + "/customer_id/" + "123";
+                        var redirectUrl = 'http://localhost:3000/variant/' + extractText.text + "/src/" + source + "/customer_id/" + "123" + "?variant_id=" + val;
                         window.location.href = redirectUrl;
                     }
                     if (extractText.type == "product") {
-                        var redirectUrl = 'http://localhost:3000/product/' + extractText.text + "/src/" + source + "/customer_id/" + "123";
+                        var redirectUrl = 'http://localhost:3000/product/' + extractText.text + "/src/" + source + "/customer_id/" + "123" + "?variant_id=" + val;
                         window.location.href = redirectUrl;
                     }
                     //test
