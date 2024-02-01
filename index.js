@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Add a click event listener to the new button
             newButton.addEventListener('click', function () {
-                console.log("action on new button", newButton)
                 // Get the current URL
                 var currentUrl = window.location.href;
                 let extractText = extractTextFromUrl(currentUrl);
@@ -88,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
 async function initializeScript() {
     function transformPropertiesToUrl(currentHref, check) {
         const urlString = check ? currentHref : window.location.href;
-        console.log(urlString)
         const url = new URL(urlString);
         const params = new URLSearchParams(url.search);
         const clientDesignId = params.get('clientDesignId');
@@ -96,7 +94,6 @@ async function initializeScript() {
         const projectVolumes = params.get('projectVolumes');
         const projectVariantIds = params.get('projectVariantIds');
         const shopifyCartUrl = window.location.origin;
-        console.log(shopifyCartUrl, clientDesignId, projectIds, projectVolumes, projectVariantIds)
         if (typeof (clientDesignId) == "undefined") {
             return false;
         } else {
@@ -140,7 +137,6 @@ async function initializeScript() {
     }
 
     function addProperties() {
-        console.log(myData?.urlParams?.comeFromUrl, myData?.urlParams?.clientDesignId, typeof (myData?.urlParams?.clientDesignId))
         if (myData?.urlParams?.comeFromUrl === true && myData?.urlParams?.clientDesignId != undefined) {
             const thumbUrl = generateThumbUrl();
             return {
@@ -158,7 +154,6 @@ async function initializeScript() {
     }
 
     function checkUpdateOrAdd(properties) {
-        console.log(myData.currentCart.items, properties)
         if (myData.currentCart.items.length > 0) {
             for (let item of myData?.currentCart.items) {
                 if (item.properties.projectId === properties.projectId) {
@@ -198,19 +193,16 @@ async function initializeScript() {
 
     async function manageCartAdd() {
         const productToAdd = addProperties();
-        console.log(productToAdd);
         if (productToAdd === false) {
             return;
         } else {
             let result
             const shouldUpdate = checkUpdateOrAdd(productToAdd.properties);
-            console.log(shouldUpdate)
             if (shouldUpdate) {
                 result = await updateCartItemsQuantity(productToAdd)
             } else {
                 result = await addVariantsRequest(productToAdd);
             }
-            console.log(result)
             if (result) {
                 window.location.href = window.location.origin + "/cart";
             } else {
@@ -225,7 +217,6 @@ async function initializeScript() {
         window.fetch = function (url, options) {
             return originalFetch(url, options)
                 .then(response => {
-                    console.log('URL:', url);
                     if (url.includes("change")) {
                         manageChangeButton();
                     }
@@ -264,7 +255,6 @@ async function initializeScript() {
     }
 
     function editButton(items) {
-        console.log(items);
 
         document.querySelectorAll(".cart-item").forEach((elem, index) => {
             const cartVolumeElem = elem.querySelector(".cart-item__details");
@@ -272,7 +262,6 @@ async function initializeScript() {
             cartVolumeElem.appendChild(elemAnchor);
             const avl = document.querySelectorAll("dt")
             avl.forEach((e)=>{
-                console.log(e)
                 if(e.innerHTML=="thumbUrl:"){
                     e.parentNode.remove()
                }
