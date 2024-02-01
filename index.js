@@ -1,4 +1,4 @@
-const myBackend = "http://127.0.0.1:5500/index.html"
+const myBackend = "http://localhost:3000/EzprintsDTFtransferscreen?session=927f793880ef59d47fdb538212e10b85&crpto=16869316"
 
 function extractTextFromUrl(url) {
     // Check if the URL contains the "variant" parameter
