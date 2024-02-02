@@ -22,6 +22,7 @@ function extractTextFromUrl(url) {
 //? cart update hone ke baad edit button ka url bhi update hone chahiye 
 async function initializeScript() {
 
+
     function runProductPage() {
         let product_page = window.location.href;
         if (product_page.includes("products/")) {
@@ -50,10 +51,8 @@ async function initializeScript() {
             // Check if the form element exists
 
             if (formElement) {
-                initializeAppConstant = {
-                    variantID: val
-                }
-                formElement.innerHTML = ""
+                // Remove the existing button   
+                    formElement.innerHTML = ""
                 // Create a new button element
                 var newButton = document.createElement('p');
                 newButton.id = 'custom_designButton';
@@ -76,15 +75,17 @@ async function initializeScript() {
                     // Get the current URL
                     var currentUrl = window.location.href;
                     let extractText = extractTextFromUrl(currentUrl);
-
+                    
                     if (extractText !== null) {
                         if (extractText.type == "variant") {
-                            var redirectUrl = 'http://localhost:3000/variant/' + extractText.text + "/src/" + source + "/customer_id/" + "123" + "?variant_id=" + val;
-                            window.location.href = redirectUrl;
+                            var redirectUrl = `${myBackend}?variant_id=${val}&shopURL=${window.location.origin}`
+                            console.log(redirectUrl)
+                            // window.location.href = redirectUrl;
                         }
                         if (extractText.type == "product") {
-                            var redirectUrl = 'http://localhost:3000/product/' + extractText.text + "/src/" + source + "/customer_id/" + "123" + "?variant_id=" + val;
-                            window.location.href = redirectUrl;
+                            var redirectUrl = `${myBackend}?variant_id=${val}&shopURL=${window.location.origin}`
+                            console.log(redirectUrl)
+                            // window.location.href = redirectUrl;
                         }
                         //test
                     }
@@ -249,11 +250,11 @@ async function initializeScript() {
 
         const objectToQueryString = obj => {
             const params = new URLSearchParams();
-                if (obj.hasOwnProperty(key)) {
-                    params.append("session", obj["clientDesignId"]);
-                    params.append("crpto", obj["projectIds"]);
-                    params.append("card", obj["projectVolumes"]);
-                }
+            if (obj.hasOwnProperty(key)) {
+                params.append("session", obj["clientDesignId"]);
+                params.append("crpto", obj["projectIds"]);
+                params.append("card", obj["projectVolumes"]);
+            }
             return params.toString();
         };
 
