@@ -1,4 +1,4 @@
-const myBackend = "http://localhost:3000/EzprintsDTFtransferscreen?session=927f793880ef59d47fdb538212e10b85&crpto=16869316"
+const myBackend = "http://localhost:3000/EzprintsDTFtransferscreen"
 
 function extractTextFromUrl(url) {
     // Check if the URL contains the "variant" parameter
@@ -21,21 +21,7 @@ function extractTextFromUrl(url) {
 
 //? cart update hone ke baad edit button ka url bhi update hone chahiye 
 async function initializeScript() {
-    function manageUI() {
 
-        const avl = document.querySelectorAll("dt")
-        avl.forEach((e) => {
-            if (e.innerHTML == "thumbUrl:") {
-                e.parentNode.remove()
-            }
-            if (e.innerHTML == "projectId:") {
-                e.parentNode.remove()
-            }
-            if (e.innerHTML == "clientDesignId:") {
-                e.parentNode.remove()
-            }
-        })
-    }
     function runProductPage() {
         let product_page = window.location.href;
         if (product_page.includes("products/")) {
@@ -263,13 +249,11 @@ async function initializeScript() {
 
         const objectToQueryString = obj => {
             const params = new URLSearchParams();
-            for (const key in obj) {
                 if (obj.hasOwnProperty(key)) {
                     params.append("session", obj["clientDesignId"]);
                     params.append("crpto", obj["projectIds"]);
                     params.append("card", obj["projectVolumes"]);
                 }
-            }
             return params.toString();
         };
 
@@ -330,12 +314,27 @@ async function initializeScript() {
     let myData = {};
     myData.urlParams = transformPropertiesToUrl();
     myData.currentCart = await loadCart();
-    manageUI()
     runProductPage()
     manageCartAdd();
     manageEditButton();
 }
 document?.addEventListener('DOMContentLoaded', function () {
+    function manageUI() {
+
+        const avl = document.querySelectorAll("dt")
+        avl.forEach((e) => {
+            if (e.innerHTML == "thumbUrl:") {
+                e.parentNode.remove()
+            }
+            if (e.innerHTML == "projectId:") {
+                e.parentNode.remove()
+            }
+            if (e.innerHTML == "clientDesignId:") {
+                e.parentNode.remove()
+            }
+        })
+    }
+    manageUI()
     initializeScript();
 })
 
