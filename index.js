@@ -15,76 +15,97 @@ function extractTextFromUrl(url) {
     return null;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    let product_page = window.location.href;
-    if (product_page.includes("products/")) {
-        const domain = window.location.origin;
-        let customer_id = "";
-        let source = domain.split('/')[2].split('.')[0];
-        let allScript = document.getElementsByTagName("script");
+document.addEventListener('DOMContentLoaded',);
 
-        // if (allScript.length > 0) {
-        // for (let i = 0; i < allScript.length; i++) {
-        //     if (
-        //     allScript[i].outerHTML.includes(`http://local/onsitescript.js?customer_id=`)
-        //     ) {
-        //     let checkId = allScript[i].outerHTML.split("customer_id=");
-        //     if (checkId.length == 2) {
-        //         customer_id = checkId[1].slice(0, 20);
-        //         break;
-        //     }
-        //     }
-        // }
-        // }
-
-        // Find the form element with the specified class
-        var formElement = document.querySelector('.product-form__buttons');
-        const val = document.querySelector(".product-variant-id")?.value
-        // Check if the form element exists
-        if (formElement) {
-            formElement.innerHTML=""
-            // Create a new button element
-            var newButton = document.createElement('p');
-            newButton.id = 'custom_designButton';
-            newButton.style.backgroundColor = '#fad71e';
-            newButton.style.color = 'black';
-            newButton.style.padding = '10px 30px';
-            newButton.style.fontSize = '18px';
-            newButton.style.fontWeight = '700';
-            newButton.style.marginTop = "40px";
-            newButton.style.cursor = 'pointer';
-            newButton.style.width = '200px';
-            newButton.style.textAlign = 'center';
-            newButton.textContent = 'Create design';
-
-            // Append the new button to the end of the form
-            formElement.appendChild(newButton);
-
-            // Add a click event listener to the new button
-            newButton.addEventListener('click', function () {
-                // Get the current URL
-                var currentUrl = window.location.href;
-                let extractText = extractTextFromUrl(currentUrl);
-
-                if (extractText !== null) {
-                    if (extractText.type == "variant") {
-                        var redirectUrl = 'http://localhost:3000/variant/' + extractText.text + "/src/" + source + "/customer_id/" + "123" + "?variant_id=" + val;
-                        window.location.href = redirectUrl;
-                    }
-                    if (extractText.type == "product") {
-                        var redirectUrl = 'http://localhost:3000/product/' + extractText.text + "/src/" + source + "/customer_id/" + "123" + "?variant_id=" + val;
-                        window.location.href = redirectUrl;
-                    }
-                    //test
-                }
-            });
-        }
-    }
-});
 
 
 //? cart update hone ke baad edit button ka url bhi update hone chahiye 
 async function initializeScript() {
+    function manageUI() {
+
+        const avl = document.querySelectorAll("dt")
+        avl.forEach((e) => {
+            if (e.innerHTML == "thumbUrl:") {
+                e.parentNode.remove()
+            }
+            if (e.innerHTML == "projectId:") {
+                e.parentNode.remove()
+            }
+            if (e.innerHTML == "clientDesignId:") {
+                e.parentNode.remove()
+            }
+        })
+    }
+    function runProductPage() {
+        let product_page = window.location.href;
+        if (product_page.includes("products/")) {
+            const domain = window.location.origin;
+            let customer_id = "";
+            let source = domain.split('/')[2].split('.')[0];
+            let allScript = document.getElementsByTagName("script");
+
+            // if (allScript.length > 0) {
+            // for (let i = 0; i < allScript.length; i++) {
+            //     if (
+            //     allScript[i].outerHTML.includes(`http://local/onsitescript.js?customer_id=`)
+            //     ) {
+            //     let checkId = allScript[i].outerHTML.split("customer_id=");
+            //     if (checkId.length == 2) {
+            //         customer_id = checkId[1].slice(0, 20);
+            //         break;
+            //     }
+            //     }
+            // }
+            // }
+
+            // Find the form element with the specified class
+            var formElement = document.querySelector('.product-form__buttons');
+            const val = document.querySelector(".product-variant-id")?.value
+            // Check if the form element exists
+
+            if (formElement) {
+                initializeAppConstant = {
+                    variantID: val
+                }
+                formElement.innerHTML = ""
+                // Create a new button element
+                var newButton = document.createElement('p');
+                newButton.id = 'custom_designButton';
+                newButton.style.backgroundColor = '#fad71e';
+                newButton.style.color = 'black';
+                newButton.style.padding = '10px 30px';
+                newButton.style.fontSize = '18px';
+                newButton.style.fontWeight = '700';
+                newButton.style.marginTop = "40px";
+                newButton.style.cursor = 'pointer';
+                newButton.style.width = '200px';
+                newButton.style.textAlign = 'center';
+                newButton.textContent = 'Create design';
+
+                // Append the new button to the end of the form
+                formElement.appendChild(newButton);
+
+                // Add a click event listener to the new button
+                newButton.addEventListener('click', function () {
+                    // Get the current URL
+                    var currentUrl = window.location.href;
+                    let extractText = extractTextFromUrl(currentUrl);
+
+                    if (extractText !== null) {
+                        if (extractText.type == "variant") {
+                            var redirectUrl = 'http://localhost:3000/variant/' + extractText.text + "/src/" + source + "/customer_id/" + "123" + "?variant_id=" + val;
+                            window.location.href = redirectUrl;
+                        }
+                        if (extractText.type == "product") {
+                            var redirectUrl = 'http://localhost:3000/product/' + extractText.text + "/src/" + source + "/customer_id/" + "123" + "?variant_id=" + val;
+                            window.location.href = redirectUrl;
+                        }
+                        //test
+                    }
+                });
+            }
+        }
+    }
     function transformPropertiesToUrl(currentHref, check) {
         const urlString = check ? currentHref : window.location.href;
         const url = new URL(urlString);
@@ -219,6 +240,7 @@ async function initializeScript() {
                 .then(response => {
                     if (url.includes("change")) {
                         manageChangeButton();
+                        manageEditButton();
                     }
                     return response;
                 })
@@ -243,7 +265,9 @@ async function initializeScript() {
             const params = new URLSearchParams();
             for (const key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    params.append(key, obj[key]);
+                    params.append("session", obj["clientDesignId"]);
+                    params.append("crpto", obj["projectIds"]);
+                    params.append("card", obj["projectVolumes"]);
                 }
             }
             return params.toString();
@@ -260,18 +284,6 @@ async function initializeScript() {
             const cartVolumeElem = elem.querySelector(".cart-item__details");
             const elemAnchor = createElemStructure(items[index]);
             cartVolumeElem.appendChild(elemAnchor);
-            const avl = document.querySelectorAll("dt")
-            avl.forEach((e)=>{
-                if(e.innerHTML=="thumbUrl:"){
-                    e.parentNode.remove()
-               }
-                if(e.innerHTML=="projectId:"){
-                    e.parentNode.remove()
-               }
-                if(e.innerHTML=="clientDesignId:"){
-                    e.parentNode.remove()
-               }
-            })
         });
     }
 
@@ -287,6 +299,7 @@ async function initializeScript() {
                 }
             }
         });
+        return true
     }
     function createElemStructure(item) {
         function createCartItem() {
@@ -317,6 +330,8 @@ async function initializeScript() {
     let myData = {};
     myData.urlParams = transformPropertiesToUrl();
     myData.currentCart = await loadCart();
+    manageUI()
+    runProductPage()
     manageCartAdd();
     manageEditButton();
 }
@@ -324,3 +339,5 @@ document?.addEventListener('DOMContentLoaded', function () {
     initializeScript();
 })
 
+const myWindow = window;
+myWindow.initializeAppConstant = {}
