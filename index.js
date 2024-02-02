@@ -15,7 +15,7 @@ function extractTextFromUrl(url) {
     return null;
 }
 
-document.addEventListener('DOMContentLoaded',);
+// document.addEventListener('DOMContentLoaded',);
 
 
 
